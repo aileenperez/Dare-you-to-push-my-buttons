@@ -55,7 +55,7 @@ def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims):
 
 
 class DDQNAgent(object):
-    def __init__(self, alpha, gamma, n_actions, epsilon, batch_size, input_dims, fname, epsilon_dec=0.97746,
+    def __init__(self, alpha, gamma, n_actions, epsilon, batch_size, input_dims, fname, epsilon_dec=0.98182,
                  epsilon_end=0.01, mem_size=1000000, replace_target=100):
         self.action_space = [i for i in range(n_actions)]
         self.n_actions = n_actions

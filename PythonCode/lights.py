@@ -42,16 +42,16 @@ class Lights:
                 self.grid[row, col] = 1
             if test:
                 reward = 0
-            print()
-            print(self.grid)
+            '''print()
+            print(self.grid)'''
         return self.grid.ravel(), reward, test, None
 
 
 if __name__ == '__main__':
     env = Lights()
-    ddqn_agent = DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=80, epsilon=0.0, batch_size=64, input_dims=100,
+    ddqn_agent = DDQNAgent(alpha=0.0005, gamma=0.99, n_actions=80, epsilon=1.0, batch_size=64, input_dims=100,
                            fname='ddqn_model.h5')
-    n_games = 1
+    n_games = 251
     ddqn_agent.load_model()
     ddqn_scores = []
     eps_history = []
