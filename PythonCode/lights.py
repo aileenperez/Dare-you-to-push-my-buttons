@@ -75,18 +75,8 @@ if __name__ == '__main__':
         if i4 % 10 == 0 and i4 > 0:
             ddqn_agent.save_model()
     if n_games > 100:
-        sum1 = 0
-        for i4 in range(101):
-            sum1 += ddqn_scores[i4]
-        avg_scores = [sum1 / 101]
-        for i4 in range(101, n_games):
-            avg_scores.append(avg_scores[i4 - 101] + (ddqn_scores[i4] - ddqn_scores[i4 - 101]) / 101)
-        del x1[:50]
-        del x1[-50:]
-        del eps_history[:50]
-        del eps_history[-50:]
         filename = 'light-ddqn.png'
-        plot_learning(x1, avg_scores, eps_history, filename)
+        plot_learning(x1, ddqn_scores, eps_history, filename)
     time = time.time() - start
     print("time: " + str(int(time // 60)) + " minutes and " + str(round(time % 60)) + " seconds")
     print("games per minute: " + str(round(60 * n_games / time)))
