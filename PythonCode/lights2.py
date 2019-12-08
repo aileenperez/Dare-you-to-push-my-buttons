@@ -42,6 +42,7 @@ class Lights:
             if test:
                 reward = 0
             # print("move " + str(80 - self.limit))
+            print()
             print(self.grid)
             # or self.limit < 1
         return self.grid.ravel(), reward, test, None
@@ -215,14 +216,22 @@ def run_light(row_actions, col_actions, loc):
 if __name__ == '__main__':
     rows = learn_row()
     cols, loc = learn_col()
-    print(rows)
-    print(cols)
     # need to merge rows and cols
-    '''r1 = [0] * (len(cols) - 1)
+    # len(rows) - len(cols) needs to be greater than 2
     if len(rows) > len(cols):
+        # [0, 1, 2, 3] and [3, 8] becomes [0, 0, 1, 2, 3] and [3, 8, 8, 8, 8]
+        if len(rows) < len(cols) + 3:
+            r1 = [0] * (len(cols) + 3 - len(rows))
+            rows = r1 + rows
+        # [0, 1, 2, 3] and [8] becomes [8, 8, 8, 8]
         for i in range(len(rows) - len(cols)):
             cols.append(cols[-1])
-    elif len(rows) < len(cols):
-        for i in range(len(cols) - len(rows)):
-            rows.append(rows[-1])
-    run_light(rows, cols, loc)'''
+    else:
+        # [0, 1, 2, 3] and [3, 3, 3, 8] becomes [0, 0, 0, 0, 1, 2, 3] and [3, 3, 3, 8, 8, 8, 8]
+        # [0, 1, 2, 3] and [3, 3, 3, 3, 8] becomes [0, 0, 0, 0, 0, 1, 2, 3] and [3, 3, 3, 3, 8, 8, 8, 8]
+        # rows size increases by 3 + cols size on the left, and cols size increases by 3 on the right
+        r1 = [0] * (len(cols) + 3 - len(rows))
+        rows = r1 + rows
+        for i in range(len(rows) - len(cols)):
+            cols.append(cols[-1])
+    run_light(rows, cols, loc)
