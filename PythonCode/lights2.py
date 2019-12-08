@@ -232,6 +232,6 @@ if __name__ == '__main__':
         # rows size increases by 3 + cols size on the left, and cols size increases by 3 on the right
         r1 = [0] * (len(cols) + 3 - len(rows))
         rows = r1 + rows
-        for i in range(len(rows) - len(cols)):
+        for i in range(3):
             cols.append(cols[-1])
     run_light(rows, cols, loc)
